@@ -15,19 +15,23 @@ FRUIT_WIDTH = 50
 FRUIT_HEIGHT = 38
 BONECO_WIDTH = 125
 BONECO_HEIGHT = 100
+BOMB_HEIGHT = 50
+BOMB_WIDTH = 50
 #-------------------------------------------------------
 arquivo = os.path.join('img', 'morango.png')
 arquivo2 = os.path.join('img', 'boneco1.png')
 arquivo3 = os.path.join('img', 'back4.png')
-
+arquivo4 = os.path.join('img', 'bomb.png')
 try:
     background = pygame.image.load(arquivo3).convert()
     fruit_img = pygame.image.load(arquivo).convert_alpha()
     boneco_img = pygame.image.load(arquivo2).convert_alpha()
+    bomb_img = pygame.image.load(arquivo4).convert_alpha()
 except pygame.error:
     sys.exit()
 fruit_img = pygame.transform.scale(fruit_img, (FRUIT_WIDTH, FRUIT_HEIGHT))
 boneco_img = pygame.transform.scale(boneco_img, (BONECO_WIDTH, BONECO_HEIGHT))
+bomb_img = pygame.transform.scale(bomb_img, (BOMB_WIDTH, BOMB_HEIGHT))
 #-------------------------------------------------------
 class Boneco(pygame.sprite.Sprite):
     def __init__(self, img):
@@ -62,9 +66,30 @@ class Fruit(pygame.sprite.Sprite):
         self.speedy = random.randint(2, 5)
         
     def update(self):
-        # Atualizando a posição do meteoro
+        # Atualizando a posição da fruta 
         self.rect.y += self.speedy
-        # Se o meteoro passar do final da tela, volta para cima e sorteia
+        # Se a fruta passar do final da tela, volta para cima e sorteia
+        # novas posições e velocidades
+        if self.rect.top > HEIGHT or self.rect.right < 0 or self.rect.left > WIDTH:
+            self.rect.x = random.randint(0, WIDTH-FRUIT_WIDTH)
+            self.rect.y = random.randint(-100, -FRUIT_HEIGHT)
+            self.speedy = random.randint(2, 5)
+
+class Bombs(pygame.sprite.Sprite):
+    def __init__(self, img):
+        # Construtor da classe mãe (Sprite).
+        pygame.sprite.Sprite.__init__(self)
+
+        self.image = img
+        self.rect = self.image.get_rect()
+        self.rect.x = random.randint(0, WIDTH-FRUIT_WIDTH)
+        self.rect.y = random.randint(-100, -FRUIT_HEIGHT)
+        self.speedy = random.randint(2, 5)
+        
+    def update(self):
+        # Atualizando a posição da bomba  
+        self.rect.y += self.speedy
+        # Se a bomba passar do final da tela, volta para cima e sorteia
         # novas posições e velocidades
         if self.rect.top > HEIGHT or self.rect.right < 0 or self.rect.left > WIDTH:
             self.rect.x = random.randint(0, WIDTH-FRUIT_WIDTH)
@@ -78,17 +103,24 @@ FPS = 60
 
 game = True
 
+
 #criando grupo 
 all_sprites = pygame.sprite.Group()
 all_fruits = pygame.sprite.Group()
+all_bombs = pygame.sprite.Group()
 #criando player
 player = Boneco(boneco_img)
 all_sprites.add(player)
 #cria frutas
-for i in range(6):
+for i in range(4):
     fruit = Fruit(fruit_img)
     all_sprites.add(fruit)
     all_fruits.add(fruit)
+
+for i in range(1):
+    bomba = Bombs(bomb_img)
+    all_sprites.add(bomba)
+    all_bombs.add(bomba)
 
 # Game Loop
 while game:
@@ -114,6 +146,17 @@ while game:
                 player.speedx -= 8
 
     all_sprites.update()
+
+      # Verifica se houve contato entre o player e a bomba
+    hits = pygame.sprite.spritecollide(player, all_bombs, True)
+    if len(hits) > 0:
+       game = False
+
+    hits2 = pygame.sprite.spritecollide(player, all_fruits, True)
+    for fruit in hits2:
+        f = Fruit(fruit_img)
+        all_sprites.add(f)
+        all_fruits.add(f)
 
     window.fill((0,0,0))
     window.blit(background, [0,0])
