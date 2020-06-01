@@ -2,23 +2,23 @@ import pygame
 import os
 import sys
 import random
-
+ 
 pygame.init()
 
 #------------------------------------------------------
-WIDTH = 480
+WIDTH = 600
 HEIGHT = 600
 window = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption('Fruits Falling')
 
 FRUIT_WIDTH = 50
 FRUIT_HEIGHT = 38
-BONECO_WIDTH = 100
-BONECO_HEIGHT = 76
+BONECO_WIDTH = 125
+BONECO_HEIGHT = 100
 #-------------------------------------------------------
 arquivo = os.path.join('img', 'morango.png')
 arquivo2 = os.path.join('img', 'boneco1.png')
-arquivo3 = os.path.join('img', 'background.jpg')
+arquivo3 = os.path.join('img', 'back4.png')
 
 try:
     background = pygame.image.load(arquivo3).convert()
