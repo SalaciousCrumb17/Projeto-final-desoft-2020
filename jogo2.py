@@ -18,18 +18,22 @@ BONECO_HEIGHT = 100
 BOMB_HEIGHT = 50
 BOMB_WIDTH = 50
 #-------------------------------------------------------
+arquivo0 = os.path.join('img', 'orange.png')
 arquivo = os.path.join('img', 'morango.png')
 arquivo2 = os.path.join('img', 'boneco1.png')
 arquivo3 = os.path.join('img', 'back4.png')
 arquivo4 = os.path.join('img', 'bomb.png')
+
 try:
     background = pygame.image.load(arquivo3).convert()
     fruit_img = pygame.image.load(arquivo).convert_alpha()
     boneco_img = pygame.image.load(arquivo2).convert_alpha()
     bomb_img = pygame.image.load(arquivo4).convert_alpha()
+    fruit2_img= pygame.image.load(arquivo0).convert_alpha()
 except pygame.error:
     sys.exit()
 fruit_img = pygame.transform.scale(fruit_img, (FRUIT_WIDTH, FRUIT_HEIGHT))
+fruit2_img = pygame.transform.scale(fruit2_img, (FRUIT_WIDTH, FRUIT_HEIGHT))
 boneco_img = pygame.transform.scale(boneco_img, (BONECO_WIDTH, BONECO_HEIGHT))
 bomb_img = pygame.transform.scale(bomb_img, (BOMB_WIDTH, BOMB_HEIGHT))
 #-------------------------------------------------------
@@ -116,7 +120,13 @@ for i in range(4):
     fruit = Fruit(fruit_img)
     all_sprites.add(fruit)
     all_fruits.add(fruit)
-
+'''   
+for i in range(4):
+    fruit2 = Fruit(fruit2_img)
+    all_sprites.add(fruit2)
+    all_fruits.add(fruit2)
+'''
+    
 for i in range(1):
     bomba = Bombs(bomb_img)
     all_sprites.add(bomba)
@@ -157,7 +167,14 @@ while game:
         f = Fruit(fruit_img)
         all_sprites.add(f)
         all_fruits.add(f)
-
+    '''
+    hits3 = pygame.sprite.spritecollide(player, all_fruits, True)
+    for fruit in hits3:
+        f2 = Fruit(fruit2_img)
+        all_sprites.add(f2)
+        all_fruits.add(f2)
+        '''
+ 
     window.fill((0,0,0))
     window.blit(background, [0,0])
     
