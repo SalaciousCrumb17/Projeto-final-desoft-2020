@@ -111,6 +111,7 @@ game = True
 #criando grupo 
 all_sprites = pygame.sprite.Group()
 all_fruits = pygame.sprite.Group()
+all_fruits2 = pygame.sprite.Group()
 all_bombs = pygame.sprite.Group()
 #criando player
 player = Boneco(boneco_img)
@@ -164,11 +165,20 @@ while game:
        game = False
 
     hits2 = pygame.sprite.spritecollide(player, all_fruits, True)
+    hits3 = pygame.sprite.spritecollide(player, all_fruits2, True) 
     for fruit in hits2:
         f = Fruit(fruit_img)
+        
+        
+        all_sprites.add(f)
+        all_fruits.add(f)
+    for fruit2 in hits3:
         f2 = Fruit(fruit2_img)
-        all_sprites.add(f, f2)
-        all_fruits.add(f, f2)
+
+        all_sprites.add(f2)
+        all_fruits.add(f2)
+
+
 
  
     window.fill((0,0,0))
