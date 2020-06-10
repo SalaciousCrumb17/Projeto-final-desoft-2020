@@ -126,7 +126,7 @@ for i in range(4):
 for i in range(4):
     fruit2 = Fruit(fruit2_img)
     all_sprites.add(fruit2)
-    all_fruits.add(fruit2)
+    all_fruits2.add(fruit2)
 
     
 for i in range(1):
@@ -176,7 +176,7 @@ while game:
         f2 = Fruit(fruit2_img)
 
         all_sprites.add(f2)
-        all_fruits.add(f2)
+        all_fruits2.add(f2)
 
 
 
