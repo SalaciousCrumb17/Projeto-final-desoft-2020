@@ -117,7 +117,7 @@ all_bombs = pygame.sprite.Group()
 player = Boneco(boneco_img)
 all_sprites.add(player)
 #cria frutas
-for i in range(1):
+for i in range(4):
     fruit = Fruit(fruit_img)
     all_sprites.add(fruit)
     all_fruits.add(fruit)
