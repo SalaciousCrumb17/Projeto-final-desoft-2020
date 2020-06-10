@@ -1,13 +1,14 @@
 import pygame
-import os
+from os import path
 import sys
 import random
 
 pygame.init()
-
+img_dir = path.join(path.dirname(__file__), 'img')
 #------------------------------------------------------
 WIDTH = 600
 HEIGHT = 600
+YELLOW = (255, 255, 0)
 window = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption('Fruits Falling')
 
@@ -18,11 +19,11 @@ BONECO_HEIGHT = 100
 BOMB_HEIGHT = 50
 BOMB_WIDTH = 50
 #-------------------------------------------------------
-arquivo0 = os.path.join('img', 'orange.png')
-arquivo = os.path.join('img', 'morango.png')
-arquivo2 = os.path.join('img', 'boneco1.png')
-arquivo3 = os.path.join('img', 'back4.png')
-arquivo4 = os.path.join('img', 'bomb.png')
+arquivo0 = path.join('img', 'orange.png')
+arquivo = path.join('img', 'morango.png')
+arquivo2 = path.join('img', 'boneco1.png')
+arquivo3 = path.join('img', 'back4.png')
+arquivo4 = path.join('img', 'bomb.png')
 
 try:
     background = pygame.image.load(arquivo3).convert()
@@ -117,7 +118,7 @@ all_bombs = pygame.sprite.Group()
 player = Boneco(boneco_img)
 all_sprites.add(player)
 #cria frutas
-for i in range(1):
+for i in range(4):
     fruit = Fruit(fruit_img)
     all_sprites.add(fruit)
     all_fruits.add(fruit)
@@ -126,7 +127,7 @@ for i in range(1):
 for i in range(1):
     fruit2 = Fruit(fruit2_img)
     all_sprites.add(fruit2)
-    all_fruits.add(fruit2)
+    all_fruits2.add(fruit2)
 
     
 for i in range(1):
@@ -134,6 +135,14 @@ for i in range(1):
     all_sprites.add(bomba)
     all_bombs.add(bomba)
 
+def load_assets(img_dir):
+    assets = {}
+    assets["score_font"] = pygame.font.Font(path.join(img_dir, "PressStart2P.ttf"), 30)
+    return assets
+
+assets = load_assets(img_dir)
+score_font = assets["score_font"]
+screen = pygame.display.set_mode((WIDTH, HEIGHT))
 # Game Loop
 while game:
     clock.tick(FPS)
@@ -174,9 +183,13 @@ while game:
         all_fruits.add(f)
     for fruit2 in hits3:
         f2 = Fruit(fruit2_img)
-
         all_sprites.add(f2)
-        all_fruits.add(f2)
+        all_fruits2.add(f2)
+        
+    text_surface = score_font.render(100*(len(hits2)), True, YELLOW)
+    text_rect1 = text_surface.get_rect()
+    text_rect1.midtop = (400,  100)
+    screen.blit(text_surface, text_rect1)
 
 
 
@@ -187,6 +200,7 @@ while game:
     all_sprites.draw(window)
 
     pygame.display.flip()
+    
 
 #finalização
 pygame.quit()
