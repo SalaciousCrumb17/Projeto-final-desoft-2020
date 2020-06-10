@@ -2,7 +2,7 @@ import pygame
 import os
 import sys
 import random
- 
+
 pygame.init()
 
 #------------------------------------------------------
@@ -117,13 +117,13 @@ all_bombs = pygame.sprite.Group()
 player = Boneco(boneco_img)
 all_sprites.add(player)
 #cria frutas
-for i in range(4):
+for i in range(1):
     fruit = Fruit(fruit_img)
     all_sprites.add(fruit)
     all_fruits.add(fruit)
     
 
-for i in range(4):
+for i in range(1):
     fruit2 = Fruit(fruit2_img)
     all_sprites.add(fruit2)
     all_fruits2.add(fruit2)
