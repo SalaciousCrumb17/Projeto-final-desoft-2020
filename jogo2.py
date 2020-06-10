@@ -186,4 +186,3 @@ while game:
  
 #finalização
 pygame.quit()
-
