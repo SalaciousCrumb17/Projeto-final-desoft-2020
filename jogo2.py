@@ -186,7 +186,7 @@ while game:
         all_sprites.add(f2)
         all_fruits2.add(f2)
         
-    text_surface = score_font.render(100*(len(hits2)), True, YELLOW)
+    text_surface = score_font.render("{:02d}".format(len(hits2)), True, YELLOW)
     text_rect1 = text_surface.get_rect()
     text_rect1.midtop = (400,  100)
     screen.blit(text_surface, text_rect1)
