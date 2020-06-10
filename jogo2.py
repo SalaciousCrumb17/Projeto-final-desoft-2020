@@ -27,7 +27,7 @@ arquivo4 = os.path.join('img', 'bomb.png')
 try:
     background = pygame.image.load(arquivo3).convert()
     fruit_img = pygame.image.load(arquivo).convert_alpha()
-    boneco_img = pygame.image.load(arquivo2).convert_alpha()
+    boneco_img = pygame.image.load(arquivo2).convert_alpha()    
     bomb_img = pygame.image.load(arquivo4).convert_alpha()
     fruit2_img= pygame.image.load(arquivo0).convert_alpha()
 except pygame.error:
@@ -120,12 +120,13 @@ for i in range(4):
     fruit = Fruit(fruit_img)
     all_sprites.add(fruit)
     all_fruits.add(fruit)
-'''   
+    
+
 for i in range(4):
     fruit2 = Fruit(fruit2_img)
     all_sprites.add(fruit2)
     all_fruits.add(fruit2)
-'''
+
     
 for i in range(1):
     bomba = Bombs(bomb_img)
@@ -165,15 +166,10 @@ while game:
     hits2 = pygame.sprite.spritecollide(player, all_fruits, True)
     for fruit in hits2:
         f = Fruit(fruit_img)
-        all_sprites.add(f)
-        all_fruits.add(f)
-    '''
-    hits3 = pygame.sprite.spritecollide(player, all_fruits, True)
-    for fruit in hits3:
         f2 = Fruit(fruit2_img)
-        all_sprites.add(f2)
-        all_fruits.add(f2)
-        '''
+        all_sprites.add(f, f2)
+        all_fruits.add(f, f2)
+
  
     window.fill((0,0,0))
     window.blit(background, [0,0])
