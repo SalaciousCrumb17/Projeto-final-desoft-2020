@@ -20,7 +20,7 @@ BOMB_WIDTH = 50
 #-------------------------------------------------------
 arquivo0 = os.path.join('img', 'orange.png')
 arquivo = os.path.join('img', 'morango.png')
-arquivo2 = os.path.join('img', 'boneco1.png')
+arquivo2 = os.path.join('img', 'dude.png')
 arquivo3 = os.path.join('img', 'back4.png')
 arquivo4 = os.path.join('img', 'bomb.png')
  
