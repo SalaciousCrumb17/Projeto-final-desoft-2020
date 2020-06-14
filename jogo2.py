@@ -17,31 +17,42 @@ BONECO_WIDTH = 125
 BONECO_HEIGHT = 100
 BOMB_HEIGHT = 50
 BOMB_WIDTH = 50
+
+#----------------Adicionando sons-----------------------
+arquivo5 = os.path.join("sound", "Spring Village.ogg")
+pygame.mixer.music.load(arquivo5)
+pygame.mixer.music.set_volume(0.1)
+pygame.mixer.music.play(-1)
+
 #-------------------------------------------------------
 arquivo0 = os.path.join('img', 'orange.png')
 arquivo = os.path.join('img', 'morango.png')
 arquivo2 = os.path.join('img', 'dude.png')
 arquivo3 = os.path.join('img', 'back4.png')
 arquivo4 = os.path.join('img', 'bomb.png')
- 
+
 try: 
     background = pygame.image.load(arquivo3).convert()
     fruit_img = pygame.image.load(arquivo).convert_alpha()
     boneco_img = pygame.image.load(arquivo2).convert_alpha()    
     bomb_img = pygame.image.load(arquivo4).convert_alpha()
     fruit2_img= pygame.image.load(arquivo0).convert_alpha() 
+    expl_som = pygame.mixer.Sound(arquivo5)
 except pygame.error:
     sys.exit()
 fruit_img = pygame.transform.scale(fruit_img, (FRUIT_WIDTH, FRUIT_HEIGHT))
 fruit2_img = pygame.transform.scale(fruit2_img, (FRUIT_WIDTH, FRUIT_HEIGHT))
 boneco_img = pygame.transform.scale(boneco_img, (BONECO_WIDTH, BONECO_HEIGHT))
 bomb_img = pygame.transform.scale(bomb_img, (BOMB_WIDTH, BOMB_HEIGHT))
+
 #-------------------------------------------------------
 class Boneco(pygame.sprite.Sprite):
     def __init__(self, img):
         pygame.sprite.Sprite.__init__(self)
- 
-        self.image = img
+
+        arquivo2 = os.path.join('img', 'dude.png')
+
+        self.image = boneco_img
         self.rect = self.image.get_rect()
         self.rect.centerx = WIDTH / 2
         self.rect.bottom = HEIGHT - 10
@@ -67,7 +78,7 @@ class Fruit(pygame.sprite.Sprite):
         # Construtor da classe mãe (Sprite).
         pygame.sprite.Sprite.__init__(self)
  
-        self.image = img
+        self.image = fruit_img
         self.rect = self.image.get_rect()
         self.rect.x = random.randint(0, WIDTH-FRUIT_WIDTH)
         self.rect.y = random.randint(-100, -FRUIT_HEIGHT)
@@ -88,7 +99,7 @@ class Bombs(pygame.sprite.Sprite):
         # Construtor da classe mãe (Sprite).
         pygame.sprite.Sprite.__init__(self)
  
-        self.image = img
+        self.image = bomb_img
         self.rect = self.image.get_rect()
         self.rect.x = random.randint(0, WIDTH-FRUIT_WIDTH)
         self.rect.y = random.randint(-100, -FRUIT_HEIGHT)
