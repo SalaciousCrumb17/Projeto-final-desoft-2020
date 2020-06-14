@@ -18,8 +18,11 @@ BONECO_HEIGHT = 100
 BOMB_HEIGHT = 50
 BOMB_WIDTH = 50
 <<<<<<< HEAD
+<<<<<<< HEAD
 assets = {}
 =======
+=======
+>>>>>>> 5b61b4ba47b4ca84fb3bb5afb8b20ab7e525d77c
 
 #----------------Adicionando sons-----------------------
 arquivo5 = os.path.join("sound", "Spring Village.ogg")
@@ -27,6 +30,9 @@ pygame.mixer.music.load(arquivo5)
 pygame.mixer.music.set_volume(0.1)
 pygame.mixer.music.play(-1)
 
+<<<<<<< HEAD
+>>>>>>> 5b61b4ba47b4ca84fb3bb5afb8b20ab7e525d77c
+=======
 >>>>>>> 5b61b4ba47b4ca84fb3bb5afb8b20ab7e525d77c
 #-------------------------------------------------------
 arquivo0 = os.path.join('img', 'orange.png')
@@ -36,10 +42,14 @@ arquivo3 = os.path.join('img', 'back4.png')
 arquivo4 = os.path.join('img', 'bomb.png')
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #carrega fonte que sera usada no placar
 assets["score_font"] = pygame.font.Font('assets/font/PressStart2P.ttf', 28)
  
 try:
+=======
+try: 
+>>>>>>> 5b61b4ba47b4ca84fb3bb5afb8b20ab7e525d77c
 =======
 try: 
 >>>>>>> 5b61b4ba47b4ca84fb3bb5afb8b20ab7e525d77c
@@ -61,7 +71,13 @@ class Boneco(pygame.sprite.Sprite):
     def __init__(self, img):
         pygame.sprite.Sprite.__init__(self)
 <<<<<<< HEAD
+<<<<<<< HEAD
  
+=======
+
+        arquivo2 = os.path.join('img', 'dude.png')
+
+>>>>>>> 5b61b4ba47b4ca84fb3bb5afb8b20ab7e525d77c
 =======
 
         arquivo2 = os.path.join('img', 'dude.png')
