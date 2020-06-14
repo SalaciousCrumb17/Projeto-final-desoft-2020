@@ -46,7 +46,12 @@ class Boneco(pygame.sprite.Sprite):
         self.rect.centerx = WIDTH / 2
         self.rect.bottom = HEIGHT - 10
         self.speedx = 0
- 
+        #reconhece a sprite com seu devido formato
+        self.mask = pygame.mask.from_surface(fruit_img)
+        self.mask = pygame.mask.from_surface(fruit2_img)
+        self.mask = pygame.mask.from_surface(boneco_img)
+        self.mask = pygame.mask.from_surface(bomb_img)
+
     def update(self):
         # Atualização da posição da nave
         self.rect.x += self.speedx
@@ -154,11 +159,17 @@ while game:
                 player.speedx -= 8
  
     all_sprites.update()
- 
-      # Verifica se houve contato entre o player e a bomba
+
     hits = pygame.sprite.spritecollide(player, all_bombs, True)
     if len(hits) > 0:
-       game = False
+        game = False
+ 
+      # Verifica se houve contato entre o player e a bomba
+    #for player in all_bombs:
+     #   if sprite.rect.collidepoint(player):
+      #      ponto_mascara = [int(player[0] - sprite.rect.x), int(player[1] - sprite.rect.y)]
+       #     if sprite.mask.get_at(ponto_mascara):
+        #        game = False
  
     hits2 = pygame.sprite.spritecollide(player, all_fruits, True)
     hits3 = pygame.sprite.spritecollide(player, all_fruits2, True) 
