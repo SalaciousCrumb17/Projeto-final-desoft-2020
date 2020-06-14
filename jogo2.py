@@ -38,7 +38,7 @@ arquivo4 = os.path.join('img', 'bomb.png')
 
 
 #carrega fonte que sera usada no placar
-assets["score_font"] = pygame.font.Font('assets/font/PressStart2P.ttf', 28)
+assets["score_font"] = pygame.font.Font('font/PressStart2P.ttf', 28)
  
 
 
