@@ -17,40 +17,64 @@ BONECO_WIDTH = 125
 BONECO_HEIGHT = 100
 BOMB_HEIGHT = 50
 BOMB_WIDTH = 50
+<<<<<<< HEAD
+assets = {}
+=======
+
+#----------------Adicionando sons-----------------------
+arquivo5 = os.path.join("sound", "Spring Village.ogg")
+pygame.mixer.music.load(arquivo5)
+pygame.mixer.music.set_volume(0.1)
+pygame.mixer.music.play(-1)
+
+>>>>>>> 5b61b4ba47b4ca84fb3bb5afb8b20ab7e525d77c
 #-------------------------------------------------------
 arquivo0 = os.path.join('img', 'orange.png')
 arquivo = os.path.join('img', 'morango.png')
 arquivo2 = os.path.join('img', 'dude.png')
 arquivo3 = os.path.join('img', 'back4.png')
 arquivo4 = os.path.join('img', 'bomb.png')
+
+<<<<<<< HEAD
+#carrega fonte que sera usada no placar
+assets["score_font"] = pygame.font.Font('assets/font/PressStart2P.ttf', 28)
  
 try:
+=======
+try: 
+>>>>>>> 5b61b4ba47b4ca84fb3bb5afb8b20ab7e525d77c
     background = pygame.image.load(arquivo3).convert()
     fruit_img = pygame.image.load(arquivo).convert_alpha()
     boneco_img = pygame.image.load(arquivo2).convert_alpha()    
     bomb_img = pygame.image.load(arquivo4).convert_alpha()
-    fruit2_img= pygame.image.load(arquivo0).convert_alpha()
+    fruit2_img= pygame.image.load(arquivo0).convert_alpha() 
+    expl_som = pygame.mixer.Sound(arquivo5)
 except pygame.error:
     sys.exit()
 fruit_img = pygame.transform.scale(fruit_img, (FRUIT_WIDTH, FRUIT_HEIGHT))
 fruit2_img = pygame.transform.scale(fruit2_img, (FRUIT_WIDTH, FRUIT_HEIGHT))
 boneco_img = pygame.transform.scale(boneco_img, (BONECO_WIDTH, BONECO_HEIGHT))
 bomb_img = pygame.transform.scale(bomb_img, (BOMB_WIDTH, BOMB_HEIGHT))
+
 #-------------------------------------------------------
 class Boneco(pygame.sprite.Sprite):
     def __init__(self, img):
         pygame.sprite.Sprite.__init__(self)
+<<<<<<< HEAD
  
-        self.image = img
+=======
+
+        arquivo2 = os.path.join('img', 'dude.png')
+
+>>>>>>> 5b61b4ba47b4ca84fb3bb5afb8b20ab7e525d77c
+        self.image = boneco_img
         self.rect = self.image.get_rect()
         self.rect.centerx = WIDTH / 2
         self.rect.bottom = HEIGHT - 10
         self.speedx = 0
         #reconhece a sprite com seu devido formato
-        self.mask = pygame.mask.from_surface(fruit_img)
-        self.mask = pygame.mask.from_surface(fruit2_img)
         self.mask = pygame.mask.from_surface(boneco_img)
-        self.mask = pygame.mask.from_surface(bomb_img)
+        
 
     def update(self):
         # Atualização da posição da nave
@@ -67,11 +91,15 @@ class Fruit(pygame.sprite.Sprite):
         # Construtor da classe mãe (Sprite).
         pygame.sprite.Sprite.__init__(self)
  
-        self.image = img
+        self.image = fruit_img
         self.rect = self.image.get_rect()
         self.rect.x = random.randint(0, WIDTH-FRUIT_WIDTH)
         self.rect.y = random.randint(-100, -FRUIT_HEIGHT)
         self.speedy = random.randint(2, 5)
+        self.mask = pygame.mask.from_surface(fruit_img)
+        self.mask = pygame.mask.from_surface(fruit2_img)
+        self.mask = pygame.mask.from_surface(boneco_img)
+        self.mask = pygame.mask.from_surface(bomb_img)
         
     def update(self):
         # Atualizando a posição da fruta 
@@ -88,7 +116,7 @@ class Bombs(pygame.sprite.Sprite):
         # Construtor da classe mãe (Sprite).
         pygame.sprite.Sprite.__init__(self)
  
-        self.image = img
+        self.image = bomb_img
         self.rect = self.image.get_rect()
         self.rect.x = random.randint(0, WIDTH-FRUIT_WIDTH)
         self.rect.y = random.randint(-100, -FRUIT_HEIGHT)
@@ -160,21 +188,20 @@ while game:
  
     all_sprites.update()
 
+    score = 0
+    # Verifica se houve contato entre o player e a bomba
     hits = pygame.sprite.spritecollide(player, all_bombs, True)
-    if len(hits) > 0:
-        game = False
- 
-      # Verifica se houve contato entre o player e a bomba
-    #for player in all_bombs:
-     #   if sprite.rect.collidepoint(player):
-      #      ponto_mascara = [int(player[0] - sprite.rect.x), int(player[1] - sprite.rect.y)]
-       #     if sprite.mask.get_at(ponto_mascara):
-        #        game = False
- 
+    for all_bombs in hits:
+        if player.rect.collidepoint(all_bombs):
+            ponto_mascara = [int(all_bombs[0] - all_bombs.rect.x), int(player[1] - all_bombs.rect.y)]
+            if player.mask.get_at(ponto_mascara):
+                game = False
+   
     hits2 = pygame.sprite.spritecollide(player, all_fruits, True)
     hits3 = pygame.sprite.spritecollide(player, all_fruits2, True) 
     for fruit in hits2:
         f = Fruit(fruit_img)
+        score += 10
         
         
         all_sprites.add(f)
@@ -184,9 +211,14 @@ while game:
  
         all_sprites.add(f2)
         all_fruits2.add(f2)
+        score += 10
 
-
- 
+    
+    text_surface = assets['score_font'].render("{:08d}".format(score), True, (255, 255, 0))
+    text_rect = text_surface.get_rect()
+    text_rect.midtop = (WIDTH / 2,  10)
+    window.blit(text_surface, text_rect)
+    
  
     window.fill((0,0,0))
     window.blit(background, [0,0])
