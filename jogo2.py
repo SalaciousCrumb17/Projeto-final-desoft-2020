@@ -156,7 +156,7 @@ for i in range(1):
     bomba = Bombs(bomb_img)
     all_sprites.add(bomba)
     all_bombs.add(bomba)
- 
+score = 0
 # Game Loop
 while game:
     clock.tick(FPS)
@@ -182,7 +182,7 @@ while game:
  
     all_sprites.update()
 
-    score = 0
+    
     # Verifica se houve contato entre o player e a bomba
     hits = pygame.sprite.spritecollide(player, all_bombs, True)
     for all_bombs in hits:
@@ -205,17 +205,19 @@ while game:
  
         all_sprites.add(f2)
         all_fruits2.add(f2)
-        score += 10
+        score += 20
 
-    
+
+    window.fill((0,0,0))
+    window.blit(background, [0,0])
     text_surface = assets['score_font'].render("{:08d}".format(score), True, (255, 255, 0))
     text_rect = text_surface.get_rect()
     text_rect.midtop = (WIDTH / 2,  10)
     window.blit(text_surface, text_rect)
     
  
-    window.fill((0,0,0))
-    window.blit(background, [0,0])
+    
+    
     
     all_sprites.draw(window)
  
