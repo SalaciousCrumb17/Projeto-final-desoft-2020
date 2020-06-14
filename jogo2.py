@@ -20,11 +20,14 @@ BOMB_WIDTH = 50
 
 assets = {}
 
+
 #----------------Adicionando sons-----------------------
 arquivo5 = os.path.join("sound", "Spring Village.ogg")
 pygame.mixer.music.load(arquivo5)
 pygame.mixer.music.set_volume(0.1)
 pygame.mixer.music.play(-1)
+
+
 
 #-------------------------------------------------------
 arquivo0 = os.path.join('img', 'orange.png')
@@ -33,9 +36,12 @@ arquivo2 = os.path.join('img', 'dude.png')
 arquivo3 = os.path.join('img', 'back4.png')
 arquivo4 = os.path.join('img', 'bomb.png')
 
+
 #carrega fonte que sera usada no placar
 assets["score_font"] = pygame.font.Font('font/PressStart2P.ttf', 28)
  
+
+
 try: 
     background = pygame.image.load(arquivo3).convert()
     fruit_img = pygame.image.load(arquivo).convert_alpha()
