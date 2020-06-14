@@ -55,9 +55,7 @@ class Boneco(pygame.sprite.Sprite):
     def __init__(self, img):
         pygame.sprite.Sprite.__init__(self)
 
-        arquivo2 = os.path.join('img', 'dude.png')
-
-        self.image = boneco_img
+        self.image = img
         self.rect = self.image.get_rect()
         self.rect.centerx = WIDTH / 2
         self.rect.bottom = HEIGHT - 10
@@ -81,7 +79,7 @@ class Fruit(pygame.sprite.Sprite):
         # Construtor da classe mãe (Sprite).
         pygame.sprite.Sprite.__init__(self)
  
-        self.image = fruit_img
+        self.image = img
         self.rect = self.image.get_rect()
         self.rect.x = random.randint(0, WIDTH-FRUIT_WIDTH)
         self.rect.y = random.randint(-100, -FRUIT_HEIGHT)
@@ -106,7 +104,7 @@ class Bombs(pygame.sprite.Sprite):
         # Construtor da classe mãe (Sprite).
         pygame.sprite.Sprite.__init__(self)
  
-        self.image = bomb_img
+        self.image = img
         self.rect = self.image.get_rect()
         self.rect.x = random.randint(0, WIDTH-FRUIT_WIDTH)
         self.rect.y = random.randint(-100, -FRUIT_HEIGHT)
