@@ -24,12 +24,12 @@ arquivo2 = os.path.join('img', 'dude.png')
 arquivo3 = os.path.join('img', 'back4.png')
 arquivo4 = os.path.join('img', 'bomb.png')
  
-try:
+try: 
     background = pygame.image.load(arquivo3).convert()
     fruit_img = pygame.image.load(arquivo).convert_alpha()
     boneco_img = pygame.image.load(arquivo2).convert_alpha()    
     bomb_img = pygame.image.load(arquivo4).convert_alpha()
-    fruit2_img= pygame.image.load(arquivo0).convert_alpha()
+    fruit2_img= pygame.image.load(arquivo0).convert_alpha() 
 except pygame.error:
     sys.exit()
 fruit_img = pygame.transform.scale(fruit_img, (FRUIT_WIDTH, FRUIT_HEIGHT))
