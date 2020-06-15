@@ -4,7 +4,8 @@ import sys
 import random
  
 pygame.init()
- 
+
+
 #------------------------------------------------------
 WIDTH = 600
 HEIGHT = 600
@@ -13,8 +14,8 @@ pygame.display.set_caption('Fruits Falling')
  
 FRUIT_WIDTH = 50
 FRUIT_HEIGHT = 38
-BONECO_WIDTH = 125
-BONECO_HEIGHT = 100
+BONECO_WIDTH = 170
+BONECO_HEIGHT = 150
 BOMB_HEIGHT = 50
 BOMB_WIDTH = 50
 
@@ -152,6 +153,19 @@ for i in range(1):
 
 score = 0
 
+black=(0,0,0)
+end_it=False
+while (end_it==False):
+    window.fill(black)
+    myfont=pygame.font.SysFont("Britannic Bold", 40)
+    nlabel=myfont.render("Start Screen", 1, (255, 0, 0))
+    for event in pygame.event.get():
+        if event.type==pygame.KEYDOWN:
+            if event.key == pygame.K_UP:
+                end_it=True
+    window.blit(nlabel,(200,200))
+    pygame.display.flip()
+
 # Game Loop
 while game:
     if len(all_bombs.sprites()) < (score//150 + 1):
@@ -194,7 +208,7 @@ while game:
         score += 10               
         all_sprites.add(f)
         all_fruits.add(f)
-    
+
     for fruit2 in hits3:
         f2 = Fruit(fruit2_img)
         all_sprites.add(f2)
