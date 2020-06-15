@@ -114,7 +114,6 @@ class Bombs(pygame.sprite.Sprite):
         self.rect.y = random.randint(-100, -FRUIT_HEIGHT)
         self.speedy = random.randint(2, 5)
         self.mask = pygame.mask.from_surface(bomb_img)
-
     def update(self):
         # Atualizando a posição da bomba  
         self.rect.y += self.speedy
@@ -155,6 +154,10 @@ score = 0
 
 # Game Loop
 while game:
+    if len(all_bombs.sprites()) < (score//150 + 1):
+        bomba = Bombs(bomb_img)
+        all_sprites.add(bomba)
+        all_bombs.add(bomba)
     
     clock.tick(FPS)
     eventos = pygame.event.get()
