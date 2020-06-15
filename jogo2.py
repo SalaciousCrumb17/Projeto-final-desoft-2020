@@ -188,7 +188,6 @@ while game:
  
     all_sprites.update()
 
-    
     # Verifica se houve contato entre o player e a bomba
     hits = pygame.sprite.spritecollide(player, all_bombs, True)
     for all_bombs in hits:
@@ -196,7 +195,7 @@ while game:
             ponto_mascara = [int(all_bombs[0] - all_bombs.rect.x), int(player[1] - all_bombs.rect.y)]
             if player.mask.get_at(ponto_mascara):
                 game = False
-   
+
     hits2 = pygame.sprite.spritecollide(player, all_fruits, True)
     hits3 = pygame.sprite.spritecollide(player, all_fruits2, True) 
     for fruit in hits2:
@@ -211,15 +210,25 @@ while game:
         all_sprites.add(f2)
         all_fruits2.add(f2)
         score += 20
+<<<<<<< HEAD
 
+=======
+    
+        
+>>>>>>> 246f095a319a4abf2eb6c5636caedd9f601789e8
     window.fill((0,0,0))
     window.blit(background, [0,0])
     text_surface = assets['score_font'].render("{:08d}".format(score), True, (255, 255, 0))
     text_rect = text_surface.get_rect()
     text_rect.midtop = (WIDTH / 2,  10)
     window.blit(text_surface, text_rect)
+<<<<<<< HEAD
     
    
+=======
+     
+    
+>>>>>>> 246f095a319a4abf2eb6c5636caedd9f601789e8
     all_sprites.draw(window)
  
     pygame.display.flip()
