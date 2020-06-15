@@ -196,7 +196,7 @@ while game:
     # Verifica se houve contato entre o player e a bomba
     hits = pygame.sprite.spritecollide(player, all_bombs, True, pygame.sprite.collide_mask)
     for all_bombs in hits:
-        if player.rect.collidepoint(all_bombs):
+        if all_bombs.rect.collidepoint(player):
             ponto_mascara = [int(all_bombs[0] - all_bombs.rect.x), int(player[1] - all_bombs.rect.y)]
             if player.mask.get_at(ponto_mascara):
                 game = False
@@ -226,7 +226,7 @@ while game:
     all_sprites.draw(window)
  
     pygame.display.flip()
- 
+
 #finalização
 pygame.quit()
 
