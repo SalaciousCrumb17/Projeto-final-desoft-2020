@@ -92,7 +92,7 @@ class Fruit(pygame.sprite.Sprite):
         self.speedy = random.randint(2, 5)
         self.mask = pygame.mask.from_surface(fruit_img)
         self.mask = pygame.mask.from_surface(fruit2_img)
-        self.mask = pygame.mask.from_surface(boneco_img)
+        
         
         
     def update(self):
@@ -196,19 +196,16 @@ while game:
     # Verifica se houve contato entre o player e a bomba
     hits = pygame.sprite.spritecollide(player, all_bombs, True, pygame.sprite.collide_mask)
     for all_bombs in hits:
-        if all_bombs.rect.collidepoint(player):
-            ponto_mascara = [int(all_bombs[0] - all_bombs.rect.x), int(player[1] - all_bombs.rect.y)]
-            if player.mask.get_at(ponto_mascara):
-                game = False
+        game = False
 
-    hits2 = pygame.sprite.spritecollide(player, all_fruits, True)
-    hits3 = pygame.sprite.spritecollide(player, all_fruits2, True) 
+    hits2 = pygame.sprite.spritecollide(player, all_fruits, True, pygame.sprite.collide_mask)
+    hits3 = pygame.sprite.spritecollide(player, all_fruits2, True, pygame.sprite.collide_mask) 
     for fruit in hits2:
         f = Fruit(fruit_img)
-        score += 10
-                
+        score += 10               
         all_sprites.add(f)
         all_fruits.add(f)
+    
     for fruit2 in hits3:
         f2 = Fruit(fruit2_img)
  
