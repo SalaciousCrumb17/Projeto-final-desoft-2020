@@ -10,7 +10,7 @@ pygame.init()
 WIDTH = 576
 HEIGHT = 576
 window = pygame.display.set_mode((WIDTH, HEIGHT))
-pygame.display.set_caption('Fruits Falling')
+pygame.display.set_caption('Falling Fruits')
  
 FRUIT_WIDTH = 50
 FRUIT_HEIGHT = 38
