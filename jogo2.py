@@ -92,12 +92,7 @@ class Fruit(pygame.sprite.Sprite):
         self.speedy = random.randint(2, 5)
         self.mask = pygame.mask.from_surface(fruit_img)
         self.mask = pygame.mask.from_surface(fruit2_img)
-<<<<<<< HEAD
-        
-        
-=======
->>>>>>> 8e2acbc37d978711821a9f260395c8219a246a8b
-        
+
     def update(self):
         # Atualizando a posição da fruta 
         self.rect.y += self.speedy
@@ -193,7 +188,6 @@ while game:
         game = False
 
     hits2 = pygame.sprite.spritecollide(player, all_fruits, True, pygame.sprite.collide_mask)
-<<<<<<< HEAD
     hits3 = pygame.sprite.spritecollide(player, all_fruits2, True, pygame.sprite.collide_mask) 
     for fruit in hits2:
         f = Fruit(fruit_img)
@@ -201,15 +195,6 @@ while game:
         all_sprites.add(f)
         all_fruits.add(f)
     
-=======
-    for fruit in hits2:
-        f = Fruit(fruit_img)
-        all_sprites.add(f)
-        all_fruits.add(f)
-        score += 10
-
-    hits3 = pygame.sprite.spritecollide(player, all_fruits2, True, pygame.sprite.collide_mask)
->>>>>>> 8e2acbc37d978711821a9f260395c8219a246a8b
     for fruit2 in hits3:
         f2 = Fruit(fruit2_img)
         all_sprites.add(f2)
