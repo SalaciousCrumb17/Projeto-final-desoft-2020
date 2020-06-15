@@ -2,6 +2,7 @@ import pygame
 import os
 import sys
 import random
+import time
  
 pygame.init()
 
@@ -25,8 +26,9 @@ assets = {}
 #----------------Adicionando sons-----------------------
 arquivo5 = os.path.join("sound", "Spring Village.ogg")
 pygame.mixer.music.load(arquivo5)
-pygame.mixer.music.set_volume(0.1)
-pygame.mixer.music.play(-1)
+arquivo6 = os.path.join('sound', 'pop.wav')
+arquivo7 = os.path.join('sound', 'expl3.wav')
+pygame.mixer.music.set_volume(0.2)
 
 
 
@@ -50,7 +52,8 @@ try:
     boneco_img = pygame.image.load(arquivo2).convert_alpha()    
     bomb_img = pygame.image.load(arquivo4).convert_alpha()
     fruit2_img= pygame.image.load(arquivo0).convert_alpha() 
-    expl_som = pygame.mixer.Sound(arquivo5)
+    pop_sound = pygame.mixer.Sound(arquivo6)
+    expl_sound = pygame.mixer.Sound(arquivo7)
 except pygame.error:
     sys.exit()
 fruit_img = pygame.transform.scale(fruit_img, (FRUIT_WIDTH, FRUIT_HEIGHT))
@@ -94,7 +97,6 @@ class Fruit(pygame.sprite.Sprite):
         self.speedy = random.randint(2, 5)
         self.mask = pygame.mask.from_surface(fruit_img)
         self.mask = pygame.mask.from_surface(fruit2_img)
-
     def update(self):
         # Atualizando a posição da fruta 
         self.rect.y += self.speedy
@@ -153,6 +155,7 @@ for i in range(1):
     all_fruits2.add(fruit2)
 
 score = 0
+pygame.mixer.music.play(-1)
 
 black=(0,0,0)
 end_it=False
@@ -201,17 +204,21 @@ while game:
     # Verifica se houve contato entre o player e a bomba
     hits = pygame.sprite.spritecollide(player, all_bombs, True, pygame.sprite.collide_mask)
     for all_bombs in hits:
+        expl_sound.play()
+        time.sleep(1)
         game = False
 
     hits2 = pygame.sprite.spritecollide(player, all_fruits, True, pygame.sprite.collide_mask)
     hits3 = pygame.sprite.spritecollide(player, all_fruits2, True, pygame.sprite.collide_mask) 
     for fruit in hits2:
+        pop_sound.play()
         f = Fruit(fruit_img)
         score += 10               
         all_sprites.add(f)
         all_fruits.add(f)
 
     for fruit2 in hits3:
+        pop_sound.play()
         f2 = Fruit(fruit2_img)
         all_sprites.add(f2)
         all_fruits2.add(f2)
