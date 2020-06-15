@@ -93,7 +93,7 @@ class Fruit(pygame.sprite.Sprite):
         self.mask = pygame.mask.from_surface(fruit_img)
         self.mask = pygame.mask.from_surface(fruit2_img)
         self.mask = pygame.mask.from_surface(boneco_img)
-        self.mask = pygame.mask.from_surface(bomb_img)
+        
         
     def update(self):
         # Atualizando a posição da fruta 
@@ -115,6 +115,7 @@ class Bombs(pygame.sprite.Sprite):
         self.rect.x = random.randint(0, WIDTH-FRUIT_WIDTH)
         self.rect.y = random.randint(-100, -FRUIT_HEIGHT)
         self.speedy = random.randint(2, 5)
+        self.mask = pygame.mask.from_surface(bomb_img)
         
     def update(self):
         # Atualizando a posição da bomba  
@@ -164,6 +165,10 @@ score = 0
 
 # Game Loop
 while game:
+    if len(all_bombs.sprites()) < (score//150 + 1):
+        bomba = Bombs(bomb_img)
+        all_sprites.add(bomba)
+        all_bombs.add(bomba)
     
     clock.tick(FPS)
     eventos = pygame.event.get()
@@ -189,7 +194,7 @@ while game:
     all_sprites.update()
 
     # Verifica se houve contato entre o player e a bomba
-    hits = pygame.sprite.spritecollide(player, all_bombs, True)
+    hits = pygame.sprite.spritecollide(player, all_bombs, True, pygame.sprite.collide_mask)
     for all_bombs in hits:
         if player.rect.collidepoint(all_bombs):
             ponto_mascara = [int(all_bombs[0] - all_bombs.rect.x), int(player[1] - all_bombs.rect.y)]
