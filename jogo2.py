@@ -93,7 +93,6 @@ class Fruit(pygame.sprite.Sprite):
         self.mask = pygame.mask.from_surface(fruit_img)
         self.mask = pygame.mask.from_surface(fruit2_img)
 
-
     def update(self):
         # Atualizando a posição da fruta 
         self.rect.y += self.speedy
@@ -124,7 +123,7 @@ class Bombs(pygame.sprite.Sprite):
             self.rect.x = random.randint(0, WIDTH-FRUIT_WIDTH)
             self.rect.y = random.randint(-100, -FRUIT_HEIGHT)
             self.speedy = random.randint(2, 5)
-  
+ 
 # Limita fps
 clock = pygame.time.Clock()
 FPS = 60
@@ -189,7 +188,6 @@ while game:
         game = False
 
     hits2 = pygame.sprite.spritecollide(player, all_fruits, True, pygame.sprite.collide_mask)
-
     hits3 = pygame.sprite.spritecollide(player, all_fruits2, True, pygame.sprite.collide_mask) 
     for fruit in hits2:
         f = Fruit(fruit_img)
@@ -197,28 +195,13 @@ while game:
         all_sprites.add(f)
         all_fruits.add(f)
     
-
-
-    for fruit in hits2:
-        f = Fruit(fruit_img)
-        all_sprites.add(f)
-        all_fruits.add(f)
-        score += 10
-
-    hits3 = pygame.sprite.spritecollide(player, all_fruits2, True, pygame.sprite.collide_mask)
-
-
     for fruit2 in hits3:
         f2 = Fruit(fruit2_img)
         all_sprites.add(f2)
         all_fruits2.add(f2)
         score += 20
 
-    if len(all_bombs.sprites()) < (score//150) + 1:
-        if True:
-            bomba1 = Bombs(bomb_img)
-            all_sprites.add(bomba1)
-            all_bombs.add(bomba1)
+    
     window.fill((0,0,0))
     window.blit(background, [0,0])
     text_surface = assets['score_font'].render("{:08d}".format(score), True, (255, 255, 0))
@@ -233,6 +216,5 @@ while game:
 #finalização
 pygame.quit()
 
-
-#Referências
-#Som: patrickdearteaga.com 
+#Referencia 
+#Som : patrickdearteaga.com 
