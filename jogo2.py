@@ -210,25 +210,14 @@ while game:
         all_sprites.add(f2)
         all_fruits2.add(f2)
         score += 20
-<<<<<<< HEAD
 
-=======
-    
-        
->>>>>>> 246f095a319a4abf2eb6c5636caedd9f601789e8
     window.fill((0,0,0))
     window.blit(background, [0,0])
     text_surface = assets['score_font'].render("{:08d}".format(score), True, (255, 255, 0))
     text_rect = text_surface.get_rect()
     text_rect.midtop = (WIDTH / 2,  10)
     window.blit(text_surface, text_rect)
-<<<<<<< HEAD
-    
-   
-=======
-     
-    
->>>>>>> 246f095a319a4abf2eb6c5636caedd9f601789e8
+
     all_sprites.draw(window)
  
     pygame.display.flip()
