@@ -92,8 +92,6 @@ class Fruit(pygame.sprite.Sprite):
         self.speedy = random.randint(2, 5)
         self.mask = pygame.mask.from_surface(fruit_img)
         self.mask = pygame.mask.from_surface(fruit2_img)
-        self.mask = pygame.mask.from_surface(boneco_img)
-        self.mask = pygame.mask.from_surface(bomb_img)
         
     def update(self):
         # Atualizando a posição da fruta 
@@ -115,7 +113,8 @@ class Bombs(pygame.sprite.Sprite):
         self.rect.x = random.randint(0, WIDTH-FRUIT_WIDTH)
         self.rect.y = random.randint(-100, -FRUIT_HEIGHT)
         self.speedy = random.randint(2, 5)
-        
+        self.mask = pygame.mask.from_surface(bomb_img)
+
     def update(self):
         # Atualizando a posição da bomba  
         self.rect.y += self.speedy
@@ -152,14 +151,6 @@ for i in range(1):
     all_sprites.add(fruit2)
     all_fruits2.add(fruit2)
 
-
-
-
-for i in range(1):
-    bomba = Bombs(bomb_img)
-    all_sprites.add(bomba)
-    all_bombs.add(bomba)
-
 score = 0
 
 # Game Loop
@@ -189,28 +180,29 @@ while game:
     all_sprites.update()
 
     # Verifica se houve contato entre o player e a bomba
-    hits = pygame.sprite.spritecollide(player, all_bombs, True)
+    hits = pygame.sprite.spritecollide(player, all_bombs, True, pygame.sprite.collide_mask)
     for all_bombs in hits:
-        if all_bombs.rect.collidepoint(player):
-            ponto_mascara = [int(all_bombs[0] - all_bombs.rect.x), int(player[1] - all_bombs.rect.y)]
-            if player.mask.get_at(ponto_mascara):
-                game = False
+        game = False
 
-    hits2 = pygame.sprite.spritecollide(player, all_fruits, True)
-    hits3 = pygame.sprite.spritecollide(player, all_fruits2, True) 
+    hits2 = pygame.sprite.spritecollide(player, all_fruits, True, pygame.sprite.collide_mask)
     for fruit in hits2:
         f = Fruit(fruit_img)
-        score += 10
-                
         all_sprites.add(f)
         all_fruits.add(f)
+        score += 10
+
+    hits3 = pygame.sprite.spritecollide(player, all_fruits2, True, pygame.sprite.collide_mask)
     for fruit2 in hits3:
         f2 = Fruit(fruit2_img)
- 
         all_sprites.add(f2)
         all_fruits2.add(f2)
         score += 20
 
+    if len(all_bombs.sprites()) < (score//150) + 1:
+        if True:
+            bomba1 = Bombs(bomb_img)
+            all_sprites.add(bomba1)
+            all_bombs.add(bomba1)
     window.fill((0,0,0))
     window.blit(background, [0,0])
     text_surface = assets['score_font'].render("{:08d}".format(score), True, (255, 255, 0))
