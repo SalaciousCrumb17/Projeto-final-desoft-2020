@@ -153,17 +153,11 @@ for i in range(1):
     all_fruits2.add(fruit2)
 
 score = 0
+for i in range(1):
+    bomba = Bombs(bomb_img)
+    all_sprites.add(bomba)
+    all_bombs.add(bomba)
 
-if score > 0:
-    for i in range(1):
-        bomba = Bombs(bomb_img)
-        all_sprites.add(bomba)
-        all_bombs.add(bomba)
-if score > 100:
-    for i in range(4):
-        bomba = Bombs(bomb_img)
-        all_sprites.add(bomba)
-        all_bombs.add(bomba)
 
 
 # Game Loop
@@ -195,7 +189,7 @@ while game:
     # Verifica se houve contato entre o player e a bomba
     hits = pygame.sprite.spritecollide(player, all_bombs, True)
     for all_bombs in hits:
-        if player.rect.collidepoint(all_bombs):
+        if all_bombs.rect.collidepoint(player):
             ponto_mascara = [int(all_bombs[0] - all_bombs.rect.x), int(player[1] - all_bombs.rect.y)]
             if player.mask.get_at(ponto_mascara):
                 game = False
@@ -214,20 +208,19 @@ while game:
         all_sprites.add(f2)
         all_fruits2.add(f2)
         score += 20
-    
-        
+
     window.fill((0,0,0))
     window.blit(background, [0,0])
     text_surface = assets['score_font'].render("{:08d}".format(score), True, (255, 255, 0))
     text_rect = text_surface.get_rect()
     text_rect.midtop = (WIDTH / 2,  10)
     window.blit(text_surface, text_rect)
-     
+
     
     all_sprites.draw(window)
  
     pygame.display.flip()
- 
+
 #finalização
 pygame.quit()
 
