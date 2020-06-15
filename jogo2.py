@@ -220,3 +220,6 @@ while game:
 #finalização
 pygame.quit()
 
+
+#Referências
+#Som: patrickdearteaga.com 
