@@ -146,19 +146,29 @@ for i in range(4):
     all_sprites.add(fruit)
     all_fruits.add(fruit)
     
- 
+
 for i in range(1):
     fruit2 = Fruit(fruit2_img)
     all_sprites.add(fruit2)
     all_fruits2.add(fruit2)
 
-for i in range(1):
-    bomba = Bombs(bomb_img)
-    all_sprites.add(bomba)
-    all_bombs.add(bomba)
 score = 0
+
+if score > 0:
+    for i in range(1):
+        bomba = Bombs(bomb_img)
+        all_sprites.add(bomba)
+        all_bombs.add(bomba)
+if score > 100:
+    for i in range(4):
+        bomba = Bombs(bomb_img)
+        all_sprites.add(bomba)
+        all_bombs.add(bomba)
+
+
 # Game Loop
 while game:
+    
     clock.tick(FPS)
     eventos = pygame.event.get()
     for event in eventos:
@@ -195,8 +205,7 @@ while game:
     for fruit in hits2:
         f = Fruit(fruit_img)
         score += 10
-        
-        
+                
         all_sprites.add(f)
         all_fruits.add(f)
     for fruit2 in hits3:
