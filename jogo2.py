@@ -152,13 +152,15 @@ for i in range(1):
     all_sprites.add(fruit2)
     all_fruits2.add(fruit2)
 
-score = 0
+
+
+
 for i in range(1):
     bomba = Bombs(bomb_img)
     all_sprites.add(bomba)
     all_bombs.add(bomba)
 
-
+score = 0
 
 # Game Loop
 while game:
@@ -216,7 +218,6 @@ while game:
     text_rect.midtop = (WIDTH / 2,  10)
     window.blit(text_surface, text_rect)
 
-    
     all_sprites.draw(window)
  
     pygame.display.flip()
