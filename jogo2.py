@@ -201,11 +201,7 @@ while game:
         all_fruits2.add(f2)
         score += 20
 
-    if len(all_bombs.sprites()) < (score//150) + 1:
-        if True:
-            bomba1 = Bombs(bomb_img)
-            all_sprites.add(bomba1)
-            all_bombs.add(bomba1)
+    
     window.fill((0,0,0))
     window.blit(background, [0,0])
     text_surface = assets['score_font'].render("{:08d}".format(score), True, (255, 255, 0))
