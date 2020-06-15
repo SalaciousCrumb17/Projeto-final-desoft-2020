@@ -7,8 +7,8 @@ pygame.init()
 
 
 #------------------------------------------------------
-WIDTH = 600
-HEIGHT = 600
+WIDTH = 576
+HEIGHT = 576
 window = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption('Fruits Falling')
  
@@ -36,6 +36,7 @@ arquivo = os.path.join('img', 'morango.png')
 arquivo2 = os.path.join('img', 'dude.png')
 arquivo3 = os.path.join('img', 'back4.png')
 arquivo4 = os.path.join('img', 'bomb.png')
+arquivo6 = os.path.join('img', 'init2.png')
 
 
 #carrega fonte que sera usada no placar
@@ -144,7 +145,7 @@ for i in range(4):
     fruit = Fruit(fruit_img)
     all_sprites.add(fruit)
     all_fruits.add(fruit)
-    
+
 
 for i in range(1):
     fruit2 = Fruit(fruit2_img)
@@ -156,9 +157,10 @@ score = 0
 black=(0,0,0)
 end_it=False
 while (end_it==False):
-    window.fill(black)
+    startscreen=pygame.image.load(arquivo6)
+    window.blit(startscreen, (0,0))
     myfont=pygame.font.SysFont("Britannic Bold", 40)
-    nlabel=myfont.render("Start Screen", 1, (255, 0, 0))
+    nlabel=myfont.render("Press UP to start", 1, (255, 255, 255))
     for event in pygame.event.get():
         if event.type==pygame.KEYDOWN:
             if event.key == pygame.K_UP:
