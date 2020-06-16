@@ -216,6 +216,8 @@ while game:
     hits = pygame.sprite.spritecollide(player, all_bombs, True, pygame.sprite.collide_mask)
     #for all_bombs in hits:  
     for all_bombs in hits:     
+        expl_sound.play()
+        time.sleep(1)
         game = False
 
     hits2 = pygame.sprite.spritecollide(player, all_fruits, True, pygame.sprite.collide_mask)
