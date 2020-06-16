@@ -14,8 +14,8 @@ pygame.init()
 
 
 #------------------------------------------------------
-WIDTH = 600
-HEIGHT = 600
+WIDTH = 576
+HEIGHT = 576
 window = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption('Fruits Falling')
  
@@ -44,6 +44,7 @@ arquivo = os.path.join('img', 'morango.png')
 arquivo2 = os.path.join('img', 'dude.png')
 arquivo3 = os.path.join('img', 'back4.png')
 arquivo4 = os.path.join('img', 'bomb.png')
+arquivox = os.path.join('img','init2.png')
 
 
 #carrega fonte que sera usada no placar
@@ -165,9 +166,10 @@ pygame.mixer.music.play(-1)
 black=(0,0,0)
 end_it=False
 while (end_it==False):
-    window.fill(black)
+    startscreen=pygame.image.load(arquivox)
+    window.blit(startscreen, (0,0))
     myfont=pygame.font.SysFont("Britannic Bold", 40)
-    nlabel=myfont.render("Start Screen", 1, (255, 0, 0))
+    nlabel=myfont.render("Press UP to Start", 1, (255, 255, 255))
     for event in pygame.event.get():
         if event .type == pygame.QUIT:
             pygame.quit()
