@@ -23,7 +23,7 @@ pygame.display.set_caption('Falling Fruits')
 
 FRUIT_WIDTH = 50
 FRUIT_HEIGHT = 38
-BONECO_WIDTH = 170
+BONECO_WIDTH = 120
 BONECO_HEIGHT = 150
 BOMB_HEIGHT = 50
 BOMB_WIDTH = 50
@@ -43,7 +43,7 @@ pygame.mixer.music.set_volume(0.2)
 #-------------------------------------------------------
 arquivo0 = os.path.join('img', 'orange.png')
 arquivo = os.path.join('img', 'morango.png')
-arquivo2 = os.path.join('img', 'dude.png')
+arquivo2 = os.path.join('img', 'dude3.png')
 arquivo3 = os.path.join('img', 'back4.png')
 arquivo4 = os.path.join('img', 'bomb.png')
 arquivox = os.path.join('img','init2.png')
