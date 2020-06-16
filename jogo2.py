@@ -23,7 +23,7 @@ pygame.display.set_caption('Falling Fruits')
 
 FRUIT_WIDTH = 50
 FRUIT_HEIGHT = 38
-BONECO_WIDTH = 120
+BONECO_WIDTH = 100
 BONECO_HEIGHT = 150
 BOMB_HEIGHT = 50
 BOMB_WIDTH = 50
@@ -46,7 +46,7 @@ arquivo = os.path.join('img', 'morango.png')
 arquivo2 = os.path.join('img', 'dude3.png')
 arquivo3 = os.path.join('img', 'back4.png')
 arquivo4 = os.path.join('img', 'bomb.png')
-arquivox = os.path.join('img','init2.png')
+arquivox = os.path.join('img','init5.png')
 
 
 #carrega fonte que sera usada no placar
