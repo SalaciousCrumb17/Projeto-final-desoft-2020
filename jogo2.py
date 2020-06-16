@@ -2,7 +2,7 @@ import pygame
 import os
 import sys
 import random
- 
+import time 
 pygame.init()
  
 #------------------------------------------------------
@@ -184,7 +184,8 @@ while game:
 
     # Verifica se houve contato entre o player e a bomba
     hits = pygame.sprite.spritecollide(player, all_bombs, True, pygame.sprite.collide_mask)
-    for all_bombs in hits:
+    #for all_bombs in hits:  
+    for all_bombs in hits:     
         game = False
 
     hits2 = pygame.sprite.spritecollide(player, all_fruits, True, pygame.sprite.collide_mask)
@@ -214,7 +215,20 @@ while game:
     pygame.display.flip()
 
 #finalização
+listascore = []
+listascore.append(score)
+if game == False:
+    window.fill((0, 0, 0))
+    myfont=pygame.font.SysFont("Britannic Bold", 50)
+    nlabel=myfont.render("your score is:{:08d}".format(score), 1, (255, 255, 255))
+    nlabel2=myfont.render("Game Over", 1, (255, 0, 0))
+    window.blit(nlabel,(100,200))
+    window.blit(nlabel2,(200,150))
+    pygame.display.flip()
+    time.sleep(3)
+
 pygame.quit()
+
 
 #Referencia 
 #Som : patrickdearteaga.com 
