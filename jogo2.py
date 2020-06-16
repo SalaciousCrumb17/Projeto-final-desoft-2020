@@ -1,5 +1,5 @@
 '''
-Fruits Falling
+Falling Fruits
 Autores: Eduardo Heitor Penteado
          Lucas Ohara
          Lucca Montini Argenton
@@ -17,8 +17,8 @@ pygame.init()
 WIDTH = 576
 HEIGHT = 576
 window = pygame.display.set_mode((WIDTH, HEIGHT))
-pygame.display.set_caption('Fruits Falling')
- 
+pygame.display.set_caption('Falling Fruits')
+
 FRUIT_WIDTH = 50
 FRUIT_HEIGHT = 38
 BONECO_WIDTH = 170
