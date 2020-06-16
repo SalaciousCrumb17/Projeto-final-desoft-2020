@@ -84,7 +84,7 @@ class Boneco(pygame.sprite.Sprite):
         
 
     def update(self):
-        # Atualização da posição da nave
+        # Atualização da posição do boneco
         self.rect.x += self.speedx
  
         # Mantem dentro da tela
@@ -135,11 +135,12 @@ class Bombs(pygame.sprite.Sprite):
             self.rect.x = random.randint(0, WIDTH-FRUIT_WIDTH)
             self.rect.y = random.randint(-100, -FRUIT_HEIGHT)
             self.speedy = random.randint(2, 5)
- 
+
+#-------------------------------------------------------
 # Limita fps
 clock = pygame.time.Clock()
 FPS = 60
- 
+
 game = True
  
 #criando grupo 
@@ -150,23 +151,27 @@ all_bombs = pygame.sprite.Group()
 #criando player
 player = Boneco(boneco_img)
 all_sprites.add(player)
-#cria frutas
+#cria morangos
 for i in range(4):
     fruit = Fruit(fruit_img)
     all_sprites.add(fruit)
     all_fruits.add(fruit)
     
-
+#cria laranja
 for i in range(1):
     fruit2 = Fruit(fruit2_img)
     all_sprites.add(fruit2)
     all_fruits2.add(fruit2)
 
+#contador da pontuação
 score = 0
+#Toca a música e deixa em um loop infinito
 pygame.mixer.music.play(-1)
 
 black=(0,0,0)
 end_it=False
+
+#cria tela de início
 while (end_it==False):
     startscreen=pygame.image.load(arquivox)
     window.blit(startscreen, (0,0))
@@ -182,8 +187,11 @@ while (end_it==False):
     window.blit(nlabel,(200,200))
     pygame.display.flip()
 
+#-------------------------------------------------------
+
 # Game Loop
 while game:
+    #aumenta o número de bombas a cada 150 pontos
     if len(all_bombs.sprites()) < (score//150 + 1):
         bomba = Bombs(bomb_img)
         all_sprites.add(bomba)
@@ -214,7 +222,6 @@ while game:
 
     # Verifica se houve contato entre o player e a bomba
     hits = pygame.sprite.spritecollide(player, all_bombs, True, pygame.sprite.collide_mask)
-    #for all_bombs in hits:  
     for all_bombs in hits:     
         expl_sound.play()
         time.sleep(1)
@@ -222,6 +229,7 @@ while game:
 
     hits2 = pygame.sprite.spritecollide(player, all_fruits, True, pygame.sprite.collide_mask)
     hits3 = pygame.sprite.spritecollide(player, all_fruits2, True, pygame.sprite.collide_mask) 
+    #gera um novo morango para cada hit
     for fruit in hits2:
         pop_sound.play()
         f = Fruit(fruit_img)
@@ -229,6 +237,7 @@ while game:
         all_sprites.add(f)
         all_fruits.add(f)
 
+    #gera uma nova laranja para cada hit
     for fruit2 in hits3:
         pop_sound.play()
         f2 = Fruit(fruit2_img)
@@ -239,6 +248,7 @@ while game:
     
     window.fill((0,0,0))
     window.blit(background, [0,0])
+    #adiciona o score na tela
     text_surface = assets['score_font'].render("{:08d}".format(score), True, (255, 255, 0))
     text_rect = text_surface.get_rect()
     text_rect.midtop = (WIDTH / 2,  10)
@@ -248,9 +258,12 @@ while game:
  
     pygame.display.flip()
 
+#-------------------------------------------------------
+
 #finalização
 listascore = []
 listascore.append(score)
+#cria tela de encerramento do jogo
 if game == False:
     window.fill((0, 0, 0))
     myfont=pygame.font.SysFont("Britannic Bold", 50)
