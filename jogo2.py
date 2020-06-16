@@ -1,20 +1,30 @@
+'''
+Fruits Falling
+Autores: Eduardo Heitor Penteado
+         Lucas Ohara
+         Lucca Montini Argenton
+'''
 import pygame
 import os
 import sys
 import random
 import time 
-pygame.init()
+
  
+
+pygame.init()
+
+
 #------------------------------------------------------
-WIDTH = 600
-HEIGHT = 600
+WIDTH = 576
+HEIGHT = 576
 window = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption('Fruits Falling')
  
 FRUIT_WIDTH = 50
 FRUIT_HEIGHT = 38
-BONECO_WIDTH = 125
-BONECO_HEIGHT = 100
+BONECO_WIDTH = 170
+BONECO_HEIGHT = 150
 BOMB_HEIGHT = 50
 BOMB_WIDTH = 50
 
@@ -24,8 +34,9 @@ assets = {}
 #----------------Adicionando sons-----------------------
 arquivo5 = os.path.join("sound", "Spring Village.ogg")
 pygame.mixer.music.load(arquivo5)
-pygame.mixer.music.set_volume(0.1)
-pygame.mixer.music.play(-1)
+arquivo6 = os.path.join('sound', 'pop.wav')
+arquivo7 = os.path.join('sound', 'expl3.wav')
+pygame.mixer.music.set_volume(0.2)
 
 
 
@@ -35,6 +46,7 @@ arquivo = os.path.join('img', 'morango.png')
 arquivo2 = os.path.join('img', 'dude.png')
 arquivo3 = os.path.join('img', 'back4.png')
 arquivo4 = os.path.join('img', 'bomb.png')
+arquivox = os.path.join('img','init2.png')
 
 
 #carrega fonte que sera usada no placar
@@ -48,7 +60,8 @@ try:
     boneco_img = pygame.image.load(arquivo2).convert_alpha()    
     bomb_img = pygame.image.load(arquivo4).convert_alpha()
     fruit2_img= pygame.image.load(arquivo0).convert_alpha() 
-    expl_som = pygame.mixer.Sound(arquivo5)
+    pop_sound = pygame.mixer.Sound(arquivo6)
+    expl_sound = pygame.mixer.Sound(arquivo7)
 except pygame.error:
     sys.exit()
 fruit_img = pygame.transform.scale(fruit_img, (FRUIT_WIDTH, FRUIT_HEIGHT))
@@ -92,7 +105,6 @@ class Fruit(pygame.sprite.Sprite):
         self.speedy = random.randint(2, 5)
         self.mask = pygame.mask.from_surface(fruit_img)
         self.mask = pygame.mask.from_surface(fruit2_img)
-
     def update(self):
         # Atualizando a posição da fruta 
         self.rect.y += self.speedy
@@ -151,6 +163,24 @@ for i in range(1):
     all_fruits2.add(fruit2)
 
 score = 0
+pygame.mixer.music.play(-1)
+
+black=(0,0,0)
+end_it=False
+while (end_it==False):
+    startscreen=pygame.image.load(arquivox)
+    window.blit(startscreen, (0,0))
+    myfont=pygame.font.SysFont("Britannic Bold", 40)
+    nlabel=myfont.render("Press UP to Start", 1, (255, 255, 255))
+    for event in pygame.event.get():
+        if event .type == pygame.QUIT:
+            pygame.quit()
+            sys.exit()
+        if event.type==pygame.KEYDOWN:
+            if event.key == pygame.K_UP:
+                end_it=True
+    window.blit(nlabel,(200,200))
+    pygame.display.flip()
 
 # Game Loop
 while game:
@@ -164,7 +194,7 @@ while game:
     for event in eventos:
         if event .type == pygame.QUIT:
             pygame.quit()
-            sys.exit
+            sys.exit()
             game = False
         if event.type == pygame.KEYDOWN:
                 # Dependendo da tecla, altera a velocidade.
@@ -191,12 +221,14 @@ while game:
     hits2 = pygame.sprite.spritecollide(player, all_fruits, True, pygame.sprite.collide_mask)
     hits3 = pygame.sprite.spritecollide(player, all_fruits2, True, pygame.sprite.collide_mask) 
     for fruit in hits2:
+        pop_sound.play()
         f = Fruit(fruit_img)
         score += 10               
         all_sprites.add(f)
         all_fruits.add(f)
-    
+
     for fruit2 in hits3:
+        pop_sound.play()
         f2 = Fruit(fruit2_img)
         all_sprites.add(f2)
         all_fruits2.add(f2)
@@ -231,4 +263,4 @@ pygame.quit()
 
 
 #Referencia 
-#Som : patrickdearteaga.com 
+#Som : patrickdearteaga.com
