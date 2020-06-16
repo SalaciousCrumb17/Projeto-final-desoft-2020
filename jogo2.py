@@ -1,3 +1,9 @@
+'''
+Fruits Falling
+Autores: Eduardo Heitor Penteado
+         Lucas Ohara
+         Lucca Montini Argenton
+'''
 import pygame
 import os
 import sys
@@ -163,6 +169,9 @@ while (end_it==False):
     myfont=pygame.font.SysFont("Britannic Bold", 40)
     nlabel=myfont.render("Start Screen", 1, (255, 0, 0))
     for event in pygame.event.get():
+        if event .type == pygame.QUIT:
+            pygame.quit()
+            sys.exit()
         if event.type==pygame.KEYDOWN:
             if event.key == pygame.K_UP:
                 end_it=True
@@ -181,7 +190,7 @@ while game:
     for event in eventos:
         if event .type == pygame.QUIT:
             pygame.quit()
-            sys.exit
+            sys.exit()
             game = False
         if event.type == pygame.KEYDOWN:
                 # Dependendo da tecla, altera a velocidade.
@@ -238,4 +247,4 @@ while game:
 pygame.quit()
 
 #Referencia 
-#Som : patrickdearteaga.com 
+#Som : patrickdearteaga.com
